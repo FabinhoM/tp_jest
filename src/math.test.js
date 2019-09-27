@@ -67,13 +67,9 @@ describe('cipher', function () {
     test('Test cipher "Test Unitaire" => "Uftu Vojubjsf"', () => {
         expect(Util.cipher("Test Unitaire")).toBe("Uftu Vojubjsf")
     })
-        test.each([
-        ["Test Unitaire", "Uftu Vojubjsf"],
-        ["Bonjour", "Cpokpvs"],
-    ])(
-        'cipher %d equals to %d',
-        (n, expected) => {
-            expect(Util.cipher(n)).toBe(expected);
-        }
-    );
+    
+    test('Test cipher "azert ZQSDFG" => "bafsu ARTEGH"', () => {
+        expect(Util.cipher("azert ZQSDFG")).toBe("bafsu ARTEGH")
+    })
+
 });

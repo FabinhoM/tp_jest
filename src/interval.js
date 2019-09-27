@@ -101,7 +101,24 @@ class Interval {
      * @returns {Interval|null}
      */
     intersection(interval) {
+        var inter = [];
+        var start = 0;
+        var end = 0;
+        if(this.overlaps(interval)){
+            if (this.start >= interval.start)
+                start = this.start;
+            else {
+                start = interval.start;
+            }
+            if(this.end <= interval.end){
+                end = this.end;
+            }else{
+                end = interval.end;
+            }
+            inter.push(new Interval(start,end));
+        }
 
+        return inter;
     };
 
     /**
