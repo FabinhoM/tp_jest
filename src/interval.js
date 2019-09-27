@@ -65,11 +65,23 @@ class Interval {
     union(interval) {
         var union = [];
         if(this.overlaps(interval)){
-            union.push(new Interval((this.start < interval.start ? this.start : interval.start),(this.end >= interval.end ? this.end : interval.end)));
-        }else {
+            if (this.start < interval.start){
+                if(this.end >= interval.end){
+                    union.push(new Interval(this.start,(this.end))); 
+                }else {
+                    union.push(new Interval(this.start,(interval.end))); 
+                }
+            }else{
+                if(this.end >= interval.end){
+                    union.push(new Interval(interval.start,(this.end))); 
+                }else {
+                    union.push(new Interval(interval.start,(interval.end))); 
+                }
+            }
+        }else{
             union.push(this, interval);
         }
-        return union;
+        return union; 
     };
 
     /**
