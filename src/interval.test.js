@@ -28,3 +28,13 @@ var interval4 = new Interval(6, 9);
             expect(interval1.includes(interval3)).toBe(false);
         });
     });
+
+    describe('union', function () {
+        test('Union if overlaps true', () => {
+            expect(interval1.union(interval2)).toStrictEqual([new Interval(5,15)]);
+        });
+        test('Union if overlaps false', () => {
+            expect(interval1.union(interval3)).toStrictEqual([new Interval(5,10), new Interval(12,13)]);
+        });
+
+    });
