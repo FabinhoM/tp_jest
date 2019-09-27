@@ -33,8 +33,30 @@ var interval4 = new Interval(6, 9);
         test('Union if overlaps true', () => {
             expect(interval1.union(interval2)).toStrictEqual([new Interval(5,15)]);
         });
+        test('Union if overlaps true', () => {
+            expect(interval2.union(interval1)).toStrictEqual([new Interval(5,15)]);
+        });
         test('Union if overlaps false', () => {
             expect(interval1.union(interval3)).toStrictEqual([new Interval(5,10), new Interval(12,13)]);
+        });
+        test('Union if overlaps true + intervale1 include interval4', () => {
+            expect(interval1.union(interval4)).toStrictEqual([new Interval(5,10)]);
+        });
+        test('Union if overlaps true + intervale1 include interval4', () => {
+            expect(interval4.union(interval1)).toStrictEqual([new Interval(5,10)]);
+        });
+
+    });
+
+    describe('intersection', function () {
+        test('Intersection should be [8:10] ', () => {
+            expect(interval1.intersection(interval2)).toStrictEqual([new Interval(8,10)]);
+        });
+        test('Intersection should be [10:8] ', () => {
+            expect(interval2.intersection(interval1)).toStrictEqual([new Interval(8,10)]);
+        });
+        test('Intersection should be [] ', () => {
+            expect(interval1.intersection(interval3)).toStrictEqual([]);
         });
 
     });
