@@ -4,9 +4,9 @@ class Interval {
         this.end = end
     }
 
-    toString() {
+    /*toString() {
         return "[" + this.start + "," + this.end + "]";
-    }
+    }*/
 
     /**
      * Exemple 1 :
@@ -79,7 +79,11 @@ class Interval {
                 }
             }
         }else{
-            union.push(this, interval);
+            if (this.start < interval.start && this.end < interval.end){
+                union.push(this, interval);
+            }else {
+                union.push(interval, this)
+            }
         }
         return union; 
     };
@@ -138,8 +142,49 @@ class Interval {
      * @returns {Interval[]}
      */
     exclusion(interval) {
-
+        var exclu = [];
+        var start_1 = 0;
+        var end_2 = 0;
+        var start_2 = 0;
+        var end_1 = 0;
+        if((this.start < interval.start && this.end > interval.end) || (interval.start < this.start && interval.end > this.end)) {
+            if(this.start < interval.start) {
+                start_1 = this.start;
+                end_1 = interval.start;
+                start_2 = interval.end;
+                end_2 = this.end;
+            }
+            else {
+                start_1 = interval.start;
+                end_1 = this.start;
+                start_2 = this.end;
+                end_2 = interval.end;
+            }
+        exclu.push(new Interval(start_1, end_1),new Interval(start_2,end_2));
+        }else if(this.overlaps(interval) && this.includes(interval) == false){
+            if(this.start < interval.start) {
+                start_1 = this.start;
+                end_1 = interval.start;
+                start_2 = this.end;
+                end_2 = interval.end;
+            }
+            else {
+                start_1 = interval.start;
+                end_1 = this.start;
+                start_2 = interval.end;
+                end_2 = this.end;
+            }
+            exclu.push(new Interval(start_1, end_1),new Interval(start_2,end_2));
+        }else{
+            if (this.start < interval.start && this.end < interval.end){
+                exclu.push(this, interval);
+            }else {
+                exclu.push(interval, this)
+            }
+        }
+        return exclu;
     };
-}
+};
+
 
 module.exports = Interval;

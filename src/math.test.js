@@ -72,4 +72,8 @@ describe('cipher', function () {
         expect(Util.cipher("azert ZQSDFG")).toBe("bafsu ARTEGH")
     })
 
+    test('Test cipher "?./! iupJUI" => "?./! jvqKVJ"', () => {
+        expect(Util.cipher("?./! iupJUI")).toBe("?./! jvqKVJ")
+    })
+
 });
